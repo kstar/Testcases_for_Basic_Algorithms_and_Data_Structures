@@ -28,9 +28,9 @@ void mergeSort( std::vector<int> &v ) {
 
 int main() {
     TestCaseFactory tcf( 1024, 4096 );
-    const int numTestcases = 1024;
-    for ( int k = 0; k < numTestcases; ++k ) {
-        std::vector<int> v = tcf.testcase();
+    const int numTestCases = 1024;
+    for ( int k = 0; k < numTestCases; ++k ) {
+        std::vector<int> v = tcf.testCase();
         mergeSort( v );
         assert( TestCaseFactory::checkSorted( v ) );
     }

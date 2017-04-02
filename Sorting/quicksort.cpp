@@ -32,14 +32,14 @@ void quickSortHoare( std::vector<int> &v ) {
 
 int main() {
     TestCaseFactory tcf( 1024, 4096 );
-    const int numTestcases = 1024;
-    for ( int k = 0; k < numTestcases; ++k ) {
-        std::vector<int> v = tcf.testcase();
+    const int numTestCases = 1024;
+    for ( int k = 0; k < numTestCases; ++k ) {
+        std::vector<int> v = tcf.testCase();
         quickSortLomuto( v );
         assert( TestCaseFactory::checkSorted( v ) );
     }
-    for ( int k = 0; k < numTestcases; ++k ) {
-        std::vector<int> v = tcf.testcase();
+    for ( int k = 0; k < numTestCases; ++k ) {
+        std::vector<int> v = tcf.testCase();
         quickSortHoare( v );
         assert( TestCaseFactory::checkSorted( v ) );
     }

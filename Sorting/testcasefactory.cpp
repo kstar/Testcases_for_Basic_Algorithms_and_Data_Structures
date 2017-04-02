@@ -31,7 +31,7 @@ TestCaseFactory::TestCaseFactory(int maxSize, int numLimit, bool randSize)
     std::srand( std::time( 0 ) );
 }
 
-std::vector<int> TestCaseFactory::testcase() {
+std::vector<int> TestCaseFactory::testCase() {
     std::vector<int> tc;
 
     int N = m_randSize ? rand() % m_maxSize + 1 : m_maxSize;
@@ -43,7 +43,7 @@ std::vector<int> TestCaseFactory::testcase() {
 }
 
 
-std::vector<int> TestCaseFactory::testcaseNoReps() {
+std::vector<int> TestCaseFactory::testCaseNoReps() {
 
     if ( m_numLimit < m_maxSize )
         return std::vector<int>();

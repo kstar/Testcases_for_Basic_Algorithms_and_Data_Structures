@@ -44,13 +44,13 @@ public:
     /**
      * @short Get testcase
      */
-    std::vector<int> testcase();
+    std::vector<int> testCase();
 
     /**
      * @short Get a testcase without repetition of numbers
      * @note if the numeric limit is smaller than the size requested, this method returns an empty vector
      */
-    std::vector<int> testcaseNoReps();
+    std::vector<int> testCaseNoReps();
 
     /**
      * @short Checks if the given vector is sorted in ascending order
