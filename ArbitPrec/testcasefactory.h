@@ -40,7 +40,7 @@ public:
     /**
      * @return a testcase
      */
-    std::string testcase();
+    std::string testCase();
 
     static bool checkResult( const std::string &num1, const std::string &num2, std::string result, bool addition = true );
 

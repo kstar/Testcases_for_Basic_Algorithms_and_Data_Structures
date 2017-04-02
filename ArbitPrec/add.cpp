@@ -32,12 +32,12 @@ std::string add(const std::string& a, const std::string& b) {
 }
 
 int main() {
-    const int testcases = 4096;
+    const int testCases = 4096;
     const int maxDigits = 4096;
     TestCaseFactory tcf( maxDigits );
-    for ( int k = 0; k < testcases; ++k ) {
-        std::string a = tcf.testcase();
-        std::string b = tcf.testcase();
+    for ( int k = 0; k < testCases; ++k ) {
+        std::string a = tcf.testCase();
+        std::string b = tcf.testCase();
         std::string result = add( a, b );
         assert( TestCaseFactory::checkResult( a, b, result ) );
     }

@@ -33,7 +33,7 @@ TestCaseFactory::TestCaseFactory(int maxDigits, bool randomizeSize)
 
 }
 
-std::string TestCaseFactory::testcase() {
+std::string TestCaseFactory::testCase() {
     std::string tc;
 
     int N = m_randomizeSize ? rand() % m_maxDigits + 1 : m_maxDigits;
