@@ -22,6 +22,7 @@
 /* STL Includes */
 #include <vector>
 #include <assert.h>
+#include <functional>
 
 // Implement binary search to return -1 if the element is not found,
 // and the index of at least one repetition of the element if found.
@@ -30,7 +31,7 @@ int binarySearch( const std::vector<int> &haystack, const int needle ) {
 }
 
 int main() {
-    const int numTestCases = 1024;
+    const int numTestCases = 4096;
     const int maxSize = 4096;
     const int numLimit = 8192;
     typedef std::pair<std::vector<int>, int> testcase_t;
