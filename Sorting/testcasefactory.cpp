@@ -74,3 +74,36 @@ bool TestCaseFactory::checkSorted( const std::vector<int>& v ) {
     }
     return true;
 }
+
+
+TestCaseFactory::ListNode *TestCaseFactory::testCaseToList(const std::vector<int> &testCaseV) {
+    TestCaseFactory::ListNode *head = nullptr, *tail = nullptr;
+    for ( const int x : testCaseV ) {
+        tail = ( head ? tail->next : head ) = new ListNode {x, nullptr};
+    }
+
+    return head;
+}
+
+
+void TestCaseFactory::deleteList( ListNode* head ) {
+    while ( head ) {
+        ListNode *temp = head->next;
+        delete head;
+        head = temp;
+    }
+}
+
+
+bool TestCaseFactory::checkSorted(const ListNode* head) {
+    int prev = std::numeric_limits<int>::min();
+
+    while ( head ) {
+        if ( head->value < prev )
+            return false;
+        prev = head->value;
+        head = head->next;
+    }
+
+    return true;
+}

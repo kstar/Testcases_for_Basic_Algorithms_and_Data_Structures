@@ -33,6 +33,11 @@ class TestCaseFactory {
 
 public:
 
+    struct ListNode {
+        int value;
+        ListNode *next;
+    };
+
     /**
      * @short Constructor
      * @param maxSize is the size of the largest possible testcase
@@ -53,9 +58,24 @@ public:
     std::vector<int> testCaseNoReps();
 
     /**
+     * @short Convert a vector test case into a singly-linked list
+     */
+    static ListNode *testCaseToList( const std::vector<int> &testCaseV );
+
+    /**
+     * @short deletes the list, convenience method
+     */
+    static void deleteList( ListNode *head );
+
+    /**
      * @short Checks if the given vector is sorted in ascending order
      */
     static bool checkSorted( const std::vector<int> &v );
+
+    /**
+     * @short Checks if the given list is sorted in ascending order
+     */
+    static bool checkSorted( const ListNode *head );
 
 private:
     int m_maxSize, m_numLimit;
