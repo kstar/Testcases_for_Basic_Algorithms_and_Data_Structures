@@ -142,6 +142,7 @@ private:
      */
     const TreeNode *predecessor( const TreeNode *node ) const;
 
+    TreeNode *find_right( int key ) const;
 
     friend class BinarySearchTree::const_iterator;
 
