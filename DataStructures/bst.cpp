@@ -120,6 +120,25 @@ const BinarySearchTree::TreeNode* BinarySearchTree::predecessor( const BinarySea
     return ret;
 }
 
+
+// You may way to implement some variant of the below private method
+// (if you choose to, uncomment and modify the declaration in the
+// header file as necessary)
+
+/*
+
+BinarySearchTree:TreeNode* BinarySearchTree::find( const int key ) const {
+    TreeNode *node = m_root;
+
+    // Your code goes here
+
+    return node;
+}
+
+*/
+
+
+// The following method is already implemented and nothing needs to be done here //
 bool BinarySearchTree::checkTree( std::string *errorString ) const {
     std::unordered_set<TreeNode *> visited;
     std::function<bool( TreeNode * )> checkSubTree = [&checkSubTree, &visited, errorString]( TreeNode *root ) -> bool {

@@ -29,6 +29,15 @@
 #include <assert.h>
 #include <string>
 
+/***
+ *** Instructions:
+
+ ***    The only frequently required modification to the header file
+ ***    would be the inclusion of private methods that may be required
+ ***    eg: TreeNode *find( const int key ) const;
+
+ ***/
+
 class BinarySearchTree {
 
 private:
@@ -38,49 +47,6 @@ private:
         struct TreeNode *left, *right, *parent;
         TreeNode( int _key, struct TreeNode *_parent ) : key( _key ), parent( _parent ), left( nullptr ), right( nullptr ) {}
     };
-
-
-public:
-
-    /**
-     * @short Constructor
-     */
-    BinarySearchTree() : m_root( nullptr ), m_size( 0 ) { }
-
-    /**
-     * @short Destructor
-     */
-    ~BinarySearchTree() { clear(); }
-
-    /**
-     * @short Inserts a key into the BST
-     */
-    void insert( int key );
-
-    /**
-     * @short Deletes a key from the BST
-     */
-    bool erase( int key );
-
-    /**
-     * @short Finds the number of copies of the given key in the BST
-     */
-    int count( int key ) const;
-
-    /**
-     * @short Erases the entire BST
-     */
-    void clear();
-
-    /**
-     * @short Return the size of the BST
-     */
-    inline int size() const { return m_size; }
-
-    /**
-     * @short Return whether the BST is empty or not
-     */
-    inline bool empty() const { return !m_root; }
 
     class const_iterator {
         typedef struct BinarySearchTree::TreeNode TreeNode;
@@ -104,21 +70,28 @@ public:
         inline const TreeNode *successor() const { return bst->successor( current ); }
     };
 
-    /**
-     * @short Returns a const_iterator that points to the first element in an in-order traversal
-     */
-    inline const_iterator cbegin() const { return const_iterator( first(), this ); }
+    /***** ====== The following methods have to be filled in ===== *****/
+public:
 
     /**
-     * @short Returns a const_iterator that points to null
+     * @short Inserts a key into the BST
      */
-    inline const_iterator cend() const { return const_iterator( nullptr, this ); }
+    void insert( int key );
 
     /**
-     * @short Checks the tree for errors
+     * @short Deletes a key from the BST
      */
-    bool checkTree( std::string *errorString = nullptr ) const;
+    bool erase( int key );
 
+    /**
+     * @short Finds the number of copies of the given key in the BST
+     */
+    int count( int key ) const;
+
+    /**
+     * @short Erases the entire BST
+     */
+    void clear();
 
 private:
 
@@ -142,7 +115,57 @@ private:
      */
     const TreeNode *predecessor( const TreeNode *node ) const;
 
+    /***** You may declare any private methods you require here and implement them in the cpp file *****/
 
+    // TreeNode *find( const int key ) const;
+
+    /***** ============================================================== *****/
+
+
+    /***** The following methods have been implemented already *****/
+
+public:
+
+    /**
+     * @short Constructor
+     */
+    BinarySearchTree() : m_root( nullptr ), m_size( 0 ) { }
+
+    /**
+     * @short Destructor
+     */
+    ~BinarySearchTree() { clear(); }
+
+    /**
+     * @short Return the size of the BST
+     */
+    inline int size() const { return m_size; }
+
+    /**
+     * @short Return whether the BST is empty or not
+     */
+    inline bool empty() const { return !m_root; }
+
+    /**
+     * @short Returns a const_iterator that points to the first element in an in-order traversal
+     */
+    inline const_iterator cbegin() const { return const_iterator( first(), this ); }
+
+    /**
+     * @short Returns a const_iterator that points to null
+     */
+    inline const_iterator cend() const { return const_iterator( nullptr, this ); }
+
+    /**
+     * @short Checks the tree for errors
+     */
+    bool checkTree( std::string *errorString = nullptr ) const;
+
+    /**
+     * @short A quick and dirty iterator for easy checking of the traversals.
+     */
+
+private:
     friend class BinarySearchTree::const_iterator;
 
     int m_size;
