@@ -27,6 +27,7 @@
  */
 
 #include <assert.h>
+#include <string>
 
 class BinarySearchTree {
 
@@ -89,6 +90,7 @@ public:
         const_iterator operator++( int ) { assert( current ); const_iterator ret( current, bst ); current = successor(); return ret; }
         const_iterator& operator--() { current = predecessor(); assert( current ); return *this; }
         const_iterator operator--( int ) { const_iterator ret( current, bst ); current = predecessor(); assert( current ); return ret; }
+        inline bool isValid() const { return current; }
         bool hasNext() const { return successor(); }
         const_iterator next() const { assert( current ); return const_iterator( successor(), bst ); }
         bool hasPrev() const { return predecessor(); }
@@ -111,6 +113,12 @@ public:
      * @short Returns a const_iterator that points to null
      */
     inline const_iterator cend() const { return const_iterator( nullptr, this ); }
+
+    /**
+     * @short Checks the tree for errors
+     */
+    bool checkTree( std::string *errorString = nullptr ) const;
+
 
 private:
 

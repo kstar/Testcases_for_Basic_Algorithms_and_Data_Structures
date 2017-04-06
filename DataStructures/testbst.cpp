@@ -24,12 +24,13 @@
 #include <ctime>
 #include <cstdlib>
 #include <assert.h>
+#include <iostream>
 
 int main() {
-    const int numTestCases = 4096;
+    const int numTestCases = 512;
     const int maxInitialSize = 2048;
     const int maxKey = 1024;
-    const int maxOperations = 512;
+    const int maxOperations = 128;
 
     std::srand( std::time( 0 ) );
 
@@ -37,6 +38,7 @@ int main() {
     std::multiset<int> refTree;
 
     for ( int k = 0; k < numTestCases; ++k ) {
+        std::cout << "Testcase " << k << " of " << numTestCases << " (" << int( float( k )/numTestCases * 100. ) << "%)" << std::endl;
         int initialSize = rand()%( maxInitialSize + 1 );
 
         // Put some initial data
@@ -46,12 +48,18 @@ int main() {
             refTree.insert( key );
             assert( testTree.size() == refTree.size() );
         }
+        std::string errorString;
+        if ( !testTree.checkTree( &errorString ) ) {
+            std::cerr << "Tree check failed after initial data insertion. Error: " << errorString << std::endl;
+            assert( false );
+        }
 
         // Do some random sequence of tree-changing operations
         int Nops = rand()%( maxOperations + 1 );
         for ( int j = 0; j < Nops; ++j ) {
             int key = rand()%( maxKey + 1 );
-            switch( rand()%2 ) {
+            int op = rand()%2;
+            switch( op ) {
             case 0:
                 testTree.insert( key );
                 refTree.insert( key );
@@ -69,8 +77,11 @@ int main() {
                 break;
             }
             }
-            assert( testTree.count( key ) == refTree.count( key ) ); // test the count method at each stage
-            assert( testTree.size() == refTree.size() );
+            errorString = "";
+            if ( !testTree.checkTree( &errorString ) ) {
+                std::cerr << "Tree check failed. Error: " << errorString << ". Last operation was " << std::string( op ? "erase" : "insert" ) << std::endl;
+                assert( false );
+            }
         }
 
         // Traverse the trees

@@ -22,6 +22,7 @@
 /* STL Includes */
 #include <assert.h>
 #include <functional>
+#include <unordered_set>
 
 /*
  * Note:
@@ -117,4 +118,31 @@ const BinarySearchTree::TreeNode* BinarySearchTree::predecessor( const BinarySea
     // If the current node is the first, return nullptr
 
     return ret;
+}
+
+bool BinarySearchTree::checkTree( std::string *errorString ) const {
+    std::unordered_set<TreeNode *> visited;
+    std::function<bool( TreeNode * )> checkSubTree = [&checkSubTree, &visited, errorString]( TreeNode *root ) -> bool {
+        if ( !root )
+            return true;
+        if ( visited.count( root ) ) {
+            if ( errorString ) *errorString = "There is a cycle";
+            return false; // cyclic
+        }
+        visited.insert( root );
+        if ( ( root->left && root->left->key > root->key ) || ( root->right && root->right->key <= root->key ) ) {
+            if ( errorString ) *errorString = "BST property (left child <= node <= right child) violation";
+            return false;
+        }
+        if ( ( root->left && root->left->parent != root ) || ( root->right && root->right->parent != root ) ) {
+            if ( errorString ) *errorString = "Mangled parent pointers";
+            return false;
+        }
+        return checkSubTree( root->left ) && checkSubTree( root->right );
+    };
+    if( m_root && m_root->parent ) {
+        if ( errorString ) *errorString = "Root node has a parent";
+        return false;
+    }
+    return checkSubTree( m_root );
 }
